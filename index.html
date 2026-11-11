@@ -63,6 +63,12 @@ footer h4{color:#fff;margin:0 0 10px}footer a{display:block;padding:2px 0;opacit
 .sim{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px}.ctl{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}.ctl select,.ctl input{padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text)}.ctl button{padding:9px 20px;border:0;border-radius:10px;color:#fff;font-weight:600;cursor:pointer;background:linear-gradient(90deg,var(--a),var(--b))}
 #svg{width:100%;max-height:300px}#log{margin:10px 0 0;min-height:70px;background:var(--term);color:#7ee787;border-radius:10px;padding:12px;font:13px/1.6 ui-monospace,monospace;white-space:pre-wrap}
 details{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin:10px 0}summary{cursor:pointer;font-weight:600}details p{color:var(--muted);margin:8px 0 0}.nw small{color:var(--a);font-weight:600}
+body.pg>header,body.pg>section{display:none}.vw{display:none;max-width:900px;margin:auto;padding:50px 5%;min-height:70vh}.vw.on{display:block}.vw h2{text-align:left}.vw p,.vw li{color:var(--muted)}
+.tbl{width:100%;border-collapse:collapse;background:var(--surface);font-size:.93rem}.tbl th,.tbl td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}.tbl th{background:var(--glow)}.tw{overflow-x:auto;border:1px solid var(--border);border-radius:12px}
+.qo{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);cursor:pointer}.qo.ok{border-color:#16a34a;background:rgba(22,163,74,.18)}.qo.no{border-color:#dc2626;background:rgba(220,38,38,.18)}
+#ed{width:100%;height:210px;background:var(--term);color:var(--termt);border:1px solid var(--border);border-radius:10px;padding:12px;font:13px/1.5 ui-monospace,monospace;resize:vertical}
+#lg{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:8px;padding:6px}
+.ppl{text-align:center}.av{width:72px;height:72px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;font-size:1.8rem;background:linear-gradient(135deg,var(--a),var(--b))}
 @media(max-width:820px){.hero .in,.two{grid-template-columns:1fr}nav .l{display:none}}
 </style>
 </head>
@@ -75,7 +81,7 @@ details{background:var(--surface);border:1px solid var(--border);border-radius:1
     <a href="#tasks">Процессер рангтары (1-6)</a><a href="#tasks">Хабар алмасу (7-29)</a><a href="#tasks">Коллективті операциялар (30-47)</a><a href="#tasks">Кешенді операциялар (48-55)</a></div></div>
   <div class="dd"><span tabindex="0">Модульдер ▾</span><div class="m">
     <a href="#tasks">Модуль 1: Рангтар</a><a href="#tasks">Модуль 2: Хабар алмасу</a><a href="#tasks">Модуль 3: Жиынтық операциялар</a></div></div>
-  <a class="l" href="#sim">Симулятор</a><a class="l" href="#news">Жаңалықтар</a><a class="l" href="#faq">FAQ</a><button id="th" title="Тақырып" style="border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:8px;padding:6px 10px;cursor:pointer">◐</button>
+  <a class="l" href="#sim">Симулятор</a><a class="l" href="#news">Жаңалықтар</a><a class="l" href="#faq">FAQ</a><div class="dd"><span tabindex="0">Көбірек ▾</span><div class="m"><a href="#theory">Теория</a><a href="#install">Орнату</a><a href="#pt4">PT4 ортасы</a><a href="#quiz">Тест және код</a><a href="#team">Оқытушылар</a><a href="#projects">Жобалар</a><a href="#schedule">Кесте</a></div></div><select id="lg"><option value="kk">ҚАЗ</option><option value="ru">РУС</option><option value="en">ENG</option></select><button id="th" title="Тақырып" style="border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:8px;padding:6px 10px;cursor:pointer">◐</button>
   <a class="l" href="#">Бұлттық технологиялар</a>
 </nav>
 
@@ -194,6 +200,53 @@ details{background:var(--surface);border:1px solid var(--border);border-radius:1
   </div>
 </section>
 
+<section id="quiz">
+  <h2>Тест және код өңдегіші</h2><p class="sub">Біліміңізді тексеріп, кодты жазып көріңіз</p>
+  <div class="two">
+    <div class="sim" id="qz"></div>
+    <div class="sim"><textarea id="ed" spellcheck="false">#include "mpi.h"
+#include <stdio.h>
+int main(int argc, char *argv[]) {
+  int rank, size;
+  MPI_Init(&argc, &argv);
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  MPI_Comm_size(MPI_COMM_WORLD, &size);
+  printf("Process %d of %d\n", rank, size);
+  MPI_Finalize();
+  return 0;
+}</textarea>
+    <div class="ctl" style="margin:10px 0 0"><button id="ck">✓ Тексеру</button><small style="color:var(--muted)">Статикалық тексеру, нақты компиляция емес</small></div><pre id="ro"></pre></div>
+  </div>
+</section>
+
+<section id="team">
+  <h2>Оқытушылар</h2><p class="sub">Кафедра құрамы (деректерді өзгертіңіз)</p>
+  <div class="grid">
+    <div class="card ppl"><div class="av">👩‍🏫</div><h3>Букенова Индира Нурмуханбетовна</h3><p>Жетекші</p></div>
+    <div class="card ppl"><div class="av">👨‍💻</div><h3>Оқытушы Аты-жөні</h3><p>Параллельді бағдарламалау</p></div>
+    <div class="card ppl"><div class="av">🧑‍🔬</div><h3>Оқытушы Аты-жөні</h3><p>Бұлттық технологиялар</p></div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Студент жобалары</h2><p class="sub">Галерея (үлгі жобалар)</p>
+  <div class="grid">
+    <div class="card nw"><div class="ic">🌡️</div><small>MPI + C</small><h3>Жылу таралу моделі</h3><p>2D жылуөткізгіштікті 16 процесте есептеу.</p></div>
+    <div class="card nw"><div class="ic">🧬</div><small>MPI + Python</small><h3>Геном іздеу</h3><p>Реттілікті бөліктерге бөліп параллель іздеу.</p></div>
+    <div class="card nw"><div class="ic">🎲</div><small>MPI + C++</small><h3>Монте-Карло</h3><p>π санын Reduce арқылы есептеу.</p></div>
+  </div>
+</section>
+
+<section id="schedule">
+  <h2>Сабақ кестесі</h2><p class="sub">Семестр жоспары (үлгі)</p>
+  <div class="tw"><table class="tbl"><tr><th>Апта</th><th>Тақырып</th><th>Тапсырмалар</th></tr>
+  <tr><td>1–2</td><td>MPI негіздері, рангтар</td><td>1–6</td></tr>
+  <tr><td>3–5</td><td>Send / Recv</td><td>7–29</td></tr>
+  <tr><td>6–8</td><td>Коллективті операциялар</td><td>30–47</td></tr>
+  <tr><td>9–10</td><td>Кешенді операциялар</td><td>48–55</td></tr>
+  <tr><td>11</td><td>Қорытынды тест, жоба қорғау</td><td>—</td></tr></table></div>
+</section>
+
 <section id="news">
   <h2>Жаңалықтар</h2><p class="sub">Хабарландырулар (үлгі мәтін, өзіңізге ауыстырыңыз)</p>
   <div class="grid">
@@ -213,19 +266,33 @@ details{background:var(--surface);border:1px solid var(--border);border-radius:1
 
 <section>
   <div class="uni">
-    <h3>Сіздің университет атауы</h3>
+    <h3>Алматы технологиялық университеті</h3>
     <div>Информатика және есептеу техникасы факультеті · Жоғары өнімді есептеулер кафедрасы</div>
   </div>
 </section>
 
+<div class="vw" id="v-theory"><a href="#why">← Басты бет</a><h2>MPI теориясы</h2>
+<p>MPI — үлестірілген жадылы жүйелерде процестер арасында хабар алмасу стандарты. Әр процестің өз рангі болады, процестер MPI_COMM_WORLD коммуникаторына біріктіріледі.</p>
+<div class="tw"><table class="tbl"><tr><th>Функция</th><th>Мақсаты</th></tr><tr><td>MPI_Init / MPI_Finalize</td><td>MPI ортасын бастау және аяқтау</td></tr><tr><td>MPI_Comm_rank</td><td>Ағымдағы процестің рангі</td></tr><tr><td>MPI_Comm_size</td><td>Процестер саны</td></tr><tr><td>MPI_Send / MPI_Recv</td><td>Екі процесс арасындағы хабар</td></tr><tr><td>MPI_Bcast</td><td>Бір процестен барлығына тарату</td></tr><tr><td>MPI_Scatter / MPI_Gather</td><td>Деректі бөліп тарату / жинау</td></tr><tr><td>MPI_Reduce</td><td>Нәтижелерді біріктіру (SUM, MAX)</td></tr></table></div></div>
+<div class="vw" id="v-install"><a href="#why">← Басты бет</a><h2>MPI орнату</h2>
+<h3>Windows</h3><p>Microsoft MPI (msmpisetup.exe және msmpisdk.msi) орнатып, mpiexec -n 4 бағдарлама.exe деп іске қосыңыз.</p>
+<h3>Linux (Ubuntu)</h3><pre style="background:var(--term);color:var(--termt);padding:12px;border-radius:10px">sudo apt install openmpi-bin libopenmpi-dev
+mpicc hello.c -o hello
+mpirun -np 4 ./hello</pre>
+<h3>macOS</h3><pre style="background:var(--term);color:var(--termt);padding:12px;border-radius:10px">brew install open-mpi
+mpicc hello.c -o hello
+mpirun -np 4 ./hello</pre></div>
+<div class="vw" id="v-pt4"><a href="#why">← Басты бет</a><h2>PT4 ортасы</h2>
+<p>PT4 — тапсырмаларды орындап, нәтижесін автоматты тексеретін оқу ортасы.</p>
+<ol><li>PT4 Setup бағдарламасын орнатыңыз.</li><li>Тапсырма нөмірін таңдаңыз (мысалы, MPIBegin1).</li><li>Шешімді жазып, компиляциялаңыз.</li><li>Нәтижені тексеріңіз, сосын осы сайтта тапсырманы орындалды деп белгілеңіз.</li></ol></div>
 <footer>
   <div class="in">
     <div><h4 class="grad" style="display:inline-block">◈ MPI HUB</h4><div style="opacity:.8">Жоғары өнімді есептеулер және параллельдік бағдарламалау бойынша оқу ресурсы</div></div>
     <div><h4>Беттер</h4><a href="#">Басты бет</a><a href="#">Жоба туралы</a><a href="#start">MPI негіздері</a><a href="#">Бұлттық технологиялар</a></div>
     <div><h4>Модульдер</h4><a href="#tasks">Рангтар</a><a href="#tasks">Хабар алмасу</a><a href="#tasks">Жиынтық операциялар</a><a href="#tasks">PT4 ортасы</a></div>
-    <div><h4>Байланыс</h4><div style="opacity:.8">Жетекші: Аты-жөні<br>Қала, көше, үй</div></div>
+    <div><h4>Байланыс</h4><div style="opacity:.8">Жетекші: Букенова Индира Нурмуханбетовна<br>Алматы қ., Төле би көшесі, 100</div></div>
   </div>
-  <div class="cp">© 2026 MPI HUB. Барлық құқықтар қорғалған</div>
+  <div class="cp">© 2026 Алматы технологиялық университеті · MPI HUB. Барлық құқықтар қорғалған</div>
 </footer>
 
 <script>
@@ -260,8 +327,34 @@ details{background:var(--surface);border:1px solid var(--border);border-radius:1
     try{navigator.clipboard.writeText(t).then(function(){b.textContent='Көшірілді ✓'},function(){b.textContent='Белгілеңіз'})}catch(e){b.textContent='Белгілеңіз'}
     setTimeout(function(){b.textContent='Көшіру'},1800)};
 
+  // menu links -> tabs
+  function openTab(i){if(document.body.classList.contains('pg'))location.hash='tasks';var b=document.querySelectorAll('#tabs button')[i];if(b)b.click();document.getElementById('tasks').scrollIntoView({behavior:'smooth'})}
+  var dds=document.querySelectorAll('.dd');
+  [[dds[0],[0,1,2,3]],[dds[1],[0,1,2]]].forEach(function(m){m[0].querySelectorAll('.m a').forEach(function(a,k){a.addEventListener('click',function(e){e.preventDefault();openTab(m[1][k]);document.activeElement&&document.activeElement.blur()})})});
+  document.querySelectorAll('footer .in > div:nth-child(3) a').forEach(function(a,k){a.addEventListener('click',function(e){e.preventDefault();openTab(Math.min(k,3))})});
+  // router
+  var VW=['theory','install','pt4'];
+  function route(){var h=location.hash.slice(1),i=VW.indexOf(h);document.body.classList.toggle('pg',i>-1);document.querySelectorAll('.vw').forEach(function(v){v.classList.toggle('on',v.id==='v-'+h)});if(i>-1)scrollTo(0,0);else if(h){var t=document.getElementById(h);t&&setTimeout(function(){t.scrollIntoView()},0)}}
+  addEventListener('hashchange',route);route();
+  // quiz
+  var QZ=[['MPI_Comm_rank не қайтарады?',['Процестің рангін','Процестер санын','Хабар өлшемін'],0],['Барлық процеске деректі тарату функциясы?',['MPI_Gather','MPI_Bcast','MPI_Recv'],1],['MPI-ды аяқтайтын функция?',['MPI_Exit','MPI_Stop','MPI_Finalize'],2]],qi=0,qs=0,qb=document.getElementById('qz');
+  function qr(){if(qi>=QZ.length){qb.innerHTML='<h3>Нәтиже: '+qs+' / '+QZ.length+'</h3><button class="tk" style="width:auto;padding:0 16px" id="qa">Қайта</button>';document.getElementById('qa').onclick=function(){qi=0;qs=0;qr()};return}
+    var q=QZ[qi];qb.innerHTML='<b>'+(qi+1)+'/'+QZ.length+'. '+q[0]+'</b>';q[1].forEach(function(t,k){var b=document.createElement('button');b.className='qo';b.textContent=t;b.onclick=function(){if(qb.dataset.l)return;qb.dataset.l=1;b.classList.add(k==q[2]?'ok':'no');if(k==q[2])qs++;else qb.querySelectorAll('.qo')[q[2]].classList.add('ok');setTimeout(function(){delete qb.dataset.l;qi++;qr()},1100)};qb.appendChild(b)})}
+  qr();
+  // code check
+  document.getElementById('ck').onclick=function(){var s=document.getElementById('ed').value,o=document.getElementById('ro'),r=['MPI_Init','MPI_Comm_rank','MPI_Comm_size','MPI_Finalize'],ok=1,h='';r.forEach(function(x){var f=new RegExp(x+'\\s*\\(').test(s);if(!f)ok=0;h+=(f?'✓ ':'✗ ')+x+'\n'});var i=s.indexOf('MPI_Init'),j=s.indexOf('MPI_Finalize');if(i>-1&&j>-1&&i>j){ok=0;h+='✗ MPI_Init MPI_Finalize-дан кейін тұр\n'}
+    if(ok){h+='\nНәтиже үлгісі (-np 3):\n';for(var k=0;k<3;k++)h+='Process '+k+' of 3\n'}o.textContent=h};
+  // i18n
+  var D={'Артықшылықтар':['Преимущества','Features'],'Жылдам бастау':['Быстрый старт','Quick start'],'Тапсырмалар ▾':['Задания ▾','Tasks ▾'],'Модульдер ▾':['Модули ▾','Modules ▾'],'Симулятор':['Симулятор','Simulator'],'Жаңалықтар':['Новости','News'],'Көбірек ▾':['Ещё ▾','More ▾'],'Теория':['Теория','Theory'],'Орнату':['Установка','Install'],'PT4 ортасы':['Среда PT4','PT4 environment'],'Тест және код':['Тест и код','Quiz & code'],'Оқытушылар':['Преподаватели','Teachers'],'Жобалар':['Проекты','Projects'],'Кесте':['Расписание','Schedule'],
+  'Параллельдік есептеулерді':['Освойте параллельные вычисления с','Master parallel computing with'],'арқылы меңгеріңіз':['','']  ,'Жоғары өнімді есептеулердің негізгі стандарты: теория, 100+ тапсырма, код мысалдары және PT4 тексеру ортасы — бір орталықта.':['Основной стандарт высокопроизводительных вычислений: теория, 100+ заданий, примеры кода и среда проверки PT4 в одном центре.','The core standard for high-performance computing: theory, 100+ tasks, code samples and the PT4 checking environment in one place.'],'Бастау':['Начать','Start'],'Практика':['Практика','Practice'],
+  'процессорға дейін':['процессоров','processors'],'HPC жүйелерінде':['в HPC-системах','in HPC systems'],'MPI функциясы':['функций MPI','MPI functions'],'есе өнімділік':['раз производительность','x performance'],
+  'Неліктен MPI?':['Почему MPI?','Why MPI?'],'Негізгі артықшылықтар':['Основные преимущества','Key benefits'],'Параллельдік':['Параллелизм','Parallelism'],'Масштабтау':['Масштабирование','Scalability'],'Портативтілік':['Переносимость','Portability'],'Көп тілдік':['Многоязычность','Multi-language'],
+  'MPI жылдам бастау':['Быстрый старт MPI','MPI quick start'],'Көшіру':['Копировать','Copy'],'▶ Іске қосу':['▶ Запуск','▶ Run'],'Оқу бағдарламасы':['Учебная программа','Curriculum'],'Қолдану салалары':['Области применения','Use cases'],'MPI симуляторы':['Симулятор MPI','MPI simulator'],'Тест және код өңдегіші':['Тест и редактор кода','Quiz and code editor'],'✓ Тексеру':['✓ Проверить','✓ Check'],'Студент жобалары':['Студенческие проекты','Student projects'],'Сабақ кестесі':['Расписание занятий','Class schedule'],'Жаңалықтар':['Новости','News'],'Жиі қойылатын сұрақтар':['Частые вопросы','Frequently asked questions'],
+  'MPI теориясы':['Теория MPI','MPI theory'],'MPI орнату':['Установка MPI','Installing MPI'],'← Басты бет':['← На главную','← Home'],'Беттер':['Страницы','Pages'],'Модульдер':['Модули','Modules'],'Байланыс':['Контакты','Contact'],'Апта':['Неделя','Week'],'Тақырып':['Тема','Topic'],'Тапсырмалар':['Задания','Tasks']};
+  var OR=new Map();
+  document.getElementById('lg').onchange=function(){var l=this.value;document.documentElement.lang=l;var w=document.createTreeWalker(document.body,4),n;while(n=w.nextNode()){if(n.parentNode.closest('script,style,pre,textarea,option'))continue;var o=OR.has(n)?OR.get(n):(OR.set(n,n.nodeValue),n.nodeValue),t=o.trim(),d=D[t];n.nodeValue=(l=='kk'||!d)?o:o.replace(t,d[l=='ru'?0:1])}};
   // theme
-  var tg=0;document.getElementById('th').onclick=function(){var d=getComputedStyle(document.documentElement).colorScheme.indexOf('dark')>-1;document.documentElement.dataset.theme=d?'light':'dark'};
+  var thm=null,mq=window.matchMedia('(prefers-color-scheme: dark)');document.getElementById('th').addEventListener('click',function(){var cur=thm||(mq.matches?'dark':'light');thm=cur=='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',thm)});
   // tracker
   var ST={};try{ST=JSON.parse(localStorage.getItem('mpi_done')||'{}')}catch(e){}
   var CT=[['Процессер рангтары',1,6],['Хабар алмасу',7,29],['Коллективті операциялар',30,47],['Кешенді операциялар',48,55]];
